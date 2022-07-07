@@ -7,10 +7,13 @@ var resultEl = document.getElementById("result-screen");
 var questionTitle = document.getElementById("questionTitle");
 var answersLi = document.getElementById("answers");
 var timerEl = document.getElementById("timer");
+var correctnessEl = document.getElementById("correctness");
 
 // Initializing Variables
 var questionIndex = 0
 var quizTimer = questions.length * 20
+var correct = ""
+var incorrect = ""
 
 console.log(answersLi)
 
@@ -32,8 +35,8 @@ function startTimer() {
 function startQuiz() {
     startEl.setAttribute("class", "hide");
     questionEl.setAttribute("class", "show")
-    questionRender()
     startTimer()
+    questionRender()
 }
 
 
@@ -43,37 +46,60 @@ function questionRender() {
     var currentQ = questions[questionIndex]
     questionEl.children[0].textContent = currentQ.question;
     answerQty = currentQ.choices.length;
-    console.log(currentQ)
+
     for (let i = 0; i < answerQty; i++) {
         let qAnswer = currentQ.choices[i]
         var choiceButton = document.createElement("button");
         choiceButton.setAttribute("class", "answer");
-        choiceButton.setAttribute("value", i+1);
+        choiceButton.setAttribute("value", i + 1);
         choiceButton.textContent = qAnswer;
         choiceButton.onclick = isCorrect;
         answersLi.appendChild(choiceButton)
     }
-    questionIndex++
+    console.log(questionIndex)
+    // questionIndex++
 }
 
-
+// Function adapted from https://www.javascripttutorial.net/dom/manipulating/remove-all-child-nodes/
+function removeAllChildren(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
 
 // Question Correctness Check/Cycles to next question
 function isCorrect() {
-    console.log("Button works")
-    console.log(this.value)
-    console.log(questionIndex)
-    if (this.value == questions[questionIndex-1].answer) {
-        console.log("Whooshooo!")
-    } else (
-        console.log("damn")
+    // console.log("Button works")
+    // console.log("This is the answer index value" + this.value)
+    // console.log("This is the question" + questionIndex)
+    // console.log("This is correct answer" + questions[questionIndex - 1].answer);
+    console.log()
 
-    )
-    // if (this.value = )
+    if (questionIndex+1 < questions.length) {
+        if (this.value == questions[questionIndex].answer) {
+            console.log("Whooshooo!")
+            questionIndex++
+            removeAllChildren(answersLi)
+            questionRender()
+            correctnessEl.textContent = "Correct!"
+            correct++
+        } else {
+            console.log("damn")
+            questionIndex++
+            removeAllChildren(answersLi)
+            questionRender()
+            correctnessEl.textContent = "Incorrect!"
+            incorrect++
+        }
+    } else {
+        window.alert("DONE!")
+    }
 }
 
 
 startButton.addEventListener("click", startQuiz)
 
 
-
+// NTS:
+// For the future updates need to add a check to confirm if the question to be rendered is last
+// If it's the last question, it'll change functions to pass to the final answer
