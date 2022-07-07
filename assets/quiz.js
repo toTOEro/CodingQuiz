@@ -33,7 +33,7 @@ function timeCounter() {
 function startQuiz() {
     startEl.setAttribute("class", "hide");
     questionEl.setAttribute("class", "show")
-    timer = setInterval(timeCounter,1000);
+    timer = setInterval(timeCounter, 1000);
     questionRender()
 }
 
@@ -55,7 +55,6 @@ function questionRender() {
         answersLi.appendChild(choiceButton)
     }
     console.log(questionIndex)
-    // questionIndex++
 }
 
 // Function adapted from https://www.javascripttutorial.net/dom/manipulating/remove-all-child-nodes/
@@ -80,7 +79,8 @@ function isCorrect() {
             questionIndex++
             removeAllChildren(answersLi)
             questionRender()
-            correctnessEl.textContent = "Correct!"
+            correctnessEl.textContent = "Correct!";
+            setTimeout(clearFeedback,3000);
             correct++
         } else {
             console.log("damn")
@@ -88,6 +88,7 @@ function isCorrect() {
             removeAllChildren(answersLi)
             questionRender()
             correctnessEl.textContent = "Incorrect!"
+            setTimeout(clearFeedback,3000);
             incorrect++
         }
     } else {
@@ -97,11 +98,38 @@ function isCorrect() {
 
 function quizComplete() {
     clearInterval(timer);
+    var submit = document.getElementById("submit");
     questionEl.setAttribute("class", "hide");
     resultEl.setAttribute("class", "show");
     scoreEl.textContent = quizTimer;
+    submit.onclick = updateScoreBoard;
+}
+
+function updateScoreBoard() {
+    var scoreBoard = JSON.parse(window.localStorage.getItem("quizScores")) || []
+    var ID = document.getElementById("ID").value
+    var score = quizTimer
+
+    if (ID != "") {
+        var newScore = {
+            ID: ID,
+            score: score
+        };
+
+        scoreBoard.push(newScore);
+        window.localStorage.setItem("quizScores", JSON.stringify(scoreBoard));
+    } else {
+        window.alert("Please Enter ID!")
+    }
+    console.log(scoreBoard)
+    console.log(newScore)
 
 }
+
+function clearFeedback() {
+    correctnessEl.textContent = "";
+}
+
 
 startButton.addEventListener("click", startQuiz)
 
