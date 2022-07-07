@@ -16,6 +16,10 @@ body {
 
 }
 
+ul {
+    display:flex;
+    font-size: 75%;
+}
 
 
 /* Hides screens to provide user a sense of progression through the game */
@@ -27,6 +31,14 @@ body {
     margin: 33vh auto 0 auto;
     max-width: 800px;
     text-align: center;
+}
+
+
+.answer {
+    width: auto;
+    height: 50px;
+    font-size: 15px;
+    margin: 10px;
 }
 
 #highScore
