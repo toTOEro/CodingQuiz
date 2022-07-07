@@ -9,6 +9,7 @@ var answersLi = document.getElementById("answers");
 var timerEl = document.getElementById("timer");
 var correctnessEl = document.getElementById("correctness");
 var scoreEl = document.getElementById("score");
+var scoreScreenEl = document.getElementById("scores-screen")
 
 // Initializing Variables
 var questionIndex = 0
@@ -57,7 +58,8 @@ function questionRender() {
     console.log(questionIndex)
 }
 
-// Function adapted from https://www.javascripttutorial.net/dom/manipulating/remove-all-child-nodes/
+// Function from https://www.javascripttutorial.net/dom/manipulating/remove-all-child-nodes/
+// This function is to clear out the choice list 
 function removeAllChildren(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
@@ -66,12 +68,6 @@ function removeAllChildren(parent) {
 
 // Question Correctness Check/Cycles to next question
 function isCorrect() {
-    // console.log("Button works")
-    // console.log("This is the answer index value" + this.value)
-    // console.log("This is the question" + questionIndex)
-    // console.log("This is correct answer" + questions[questionIndex - 1].answer);
-    console.log()
-
     // If loop to index through the questions as they are answered
     if (questionIndex + 1 < questions.length) {
         if (this.value == questions[questionIndex].answer) {
@@ -80,7 +76,7 @@ function isCorrect() {
             removeAllChildren(answersLi)
             questionRender()
             correctnessEl.textContent = "Correct!";
-            setTimeout(clearFeedback,3000);
+            setTimeout(clearFeedback, 3000);
             correct++
         } else {
             console.log("damn")
@@ -88,7 +84,7 @@ function isCorrect() {
             removeAllChildren(answersLi)
             questionRender()
             correctnessEl.textContent = "Incorrect!"
-            setTimeout(clearFeedback,3000);
+            setTimeout(clearFeedback, 3000);
             incorrect++
         }
     } else {
@@ -96,6 +92,7 @@ function isCorrect() {
     }
 }
 
+// Function to call when the quiz is completed
 function quizComplete() {
     clearInterval(timer);
     var submit = document.getElementById("submit");
@@ -105,6 +102,8 @@ function quizComplete() {
     submit.onclick = updateScoreBoard;
 }
 
+
+// Pulls scoreboard from local storage, updates with new score data
 function updateScoreBoard() {
     var scoreBoard = JSON.parse(window.localStorage.getItem("quizScores")) || []
     var ID = document.getElementById("ID").value
@@ -118,6 +117,11 @@ function updateScoreBoard() {
 
         scoreBoard.push(newScore);
         window.localStorage.setItem("quizScores", JSON.stringify(scoreBoard));
+
+        resultEl.setAttribute("class", "hide");
+        scoreScreenEl.setAttribute("class", "show")
+
+
     } else {
         window.alert("Please Enter ID!")
     }
@@ -126,6 +130,7 @@ function updateScoreBoard() {
 
 }
 
+// Function to clear the correct/incorrect feedback
 function clearFeedback() {
     correctnessEl.textContent = "";
 }
