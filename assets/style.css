@@ -16,33 +16,17 @@ body {
 
 }
 
-/* Establishing classes for different screens */
-
-.startScreen {
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-    margin: 33vh auto 0 auto;
-    max-width: 800px;
-    text-align: center;
-}
-
-.questions {
-
-
-}
-
-
-.result {
-
-
-}
 
 
 /* Hides screens to provide user a sense of progression through the game */
 .hide {
     display: none;
+}
 
+.show {
+    margin: 33vh auto 0 auto;
+    max-width: 800px;
+    text-align: center;
 }
 
 #highScore

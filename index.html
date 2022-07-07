@@ -21,21 +21,21 @@
 
 
     <!-- Main Menu -->
-    <div id="start" class = "startScreen">
+    <div id="start" class = "show">
         <h1>Coding Quiz</h1>
         <p>Welcome to the easiest coding quiz in the world!</p>
-        <button>Start Quiz</button>
+        <button id="startButton">Start Quiz</button>
     </div>
 
     <!-- Questions -->
-    <div id="question" class="question hide">
-        <title class=""></title>
+    <div id="question" class="hide">
+        <title class="">Test</title>
         <ul class="answers"></ul>
     </div>
 
 
     <!-- Score submission -->
-    <div id="result" class="result hide">
+    <div id="result" class="hide">
         <title class="submit">Submit your score!</title>
         <input type="textbox" placeholder="Your Initials Here!">
     </div>
@@ -45,4 +45,5 @@
 </html>
 
 <!-- Javascript -->
+<script src="./assets/questionBank.js"></script>
 <script src="./assets/quiz.js"></script>
