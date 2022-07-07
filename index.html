@@ -1,15 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coding Quiz</title>
+    <link rel="stylesheet" href="./assets/reset.css">
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
 
-<body>
 
-    <h1>Coding Quiz</h1>
-    <p>My first paragraph.</p>
+
+<body>
+    <!-- View High scores -->
+    <div id = "highScore">
+        <a href="#">High Scores</a>
+
+    </div>
+
+
+    <!-- Main Menu -->
+    <div id="start" class = "startScreen">
+        <h1>Coding Quiz</h1>
+        <p>Welcome to the easiest coding quiz in the world!</p>
+        <button>Start Quiz</button>
+    </div>
+
+    <!-- Questions -->
+    <div id="question" class="question hide">
+        <title class=""></title>
+        <ul class="answers"></ul>
+    </div>
+
+
+    <!-- Score submission -->
+    <div id="result" class="result hide">
+        <title class="submit">Submit your score!</title>
+        <input type="textbox" placeholder="Your Initials Here!">
+    </div>
 
 </body>
 
 </html>
+
+<!-- Javascript -->
+<script src="./assets/quiz.js"></script>

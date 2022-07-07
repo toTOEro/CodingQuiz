@@ -1,0 +1,74 @@
+:root {
+  
+
+}
+
+/* Global Settings */
+* {
+    font-family: 'Montserrat';
+
+}
+
+
+body {
+    font-size: 125%;
+    line-height: 1.25;
+
+}
+
+/* Establishing classes for different screens */
+
+.startScreen {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    margin: 33vh auto 0 auto;
+    max-width: 800px;
+    text-align: center;
+}
+
+.questions {
+
+
+}
+
+
+.result {
+
+
+}
+
+
+/* Hides screens to provide user a sense of progression through the game */
+.hide {
+    display: none;
+
+}
+
+#highScore
+
+
+/* Large smartphone sizing */
+
+@media screen and (max-width: 768px) {
+    .subcard {
+        width: 80%;
+    }
+
+    .SubProjects {
+        height: 125px;
+    }
+
+
+    h3, h5 {
+        font-size: 20px;
+
+    }
+
+
+    .contactMe a {
+        font-size: 15px;
+    }
+
+
+}
