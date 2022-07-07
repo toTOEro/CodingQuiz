@@ -8,34 +8,32 @@ var questionTitle = document.getElementById("questionTitle");
 var answersLi = document.getElementById("answers");
 var timerEl = document.getElementById("timer");
 var correctnessEl = document.getElementById("correctness");
+var scoreEl = document.getElementById("score");
 
 // Initializing Variables
 var questionIndex = 0
 var quizTimer = questions.length * 20
-var correct = ""
-var incorrect = ""
+var correct = 0
+var incorrect = 0
 
-console.log(answersLi)
 
-// Setup timer
-function startTimer() {
-    var timeInterval = setInterval(function () {
-        if (quizTimer >= 0) {
-            timerEl.textContent = "Time Left: " + quizTimer
-            quizTimer--;
-        } else {
-            clearInterval(timeInterval);
-            timerEl.textContent = "GAME OVER";
-            window.alert("GAME OVER");
-        };
-    }, 1000);
+// Setting up Timer
+function timeCounter() {
+    quizTimer--;
+    timerEl.textContent = "Time Left: " + quizTimer;
+
+    if (quizTimer <= 0) {
+        quizComplete();
+    }
+
 }
+
 
 // Function to start the quiz and initiate question rendering
 function startQuiz() {
     startEl.setAttribute("class", "hide");
     questionEl.setAttribute("class", "show")
-    startTimer()
+    timer = setInterval(timeCounter,1000);
     questionRender()
 }
 
@@ -75,7 +73,8 @@ function isCorrect() {
     // console.log("This is correct answer" + questions[questionIndex - 1].answer);
     console.log()
 
-    if (questionIndex+1 < questions.length) {
+    // If loop to index through the questions as they are answered
+    if (questionIndex + 1 < questions.length) {
         if (this.value == questions[questionIndex].answer) {
             console.log("Whooshooo!")
             questionIndex++
@@ -92,10 +91,17 @@ function isCorrect() {
             incorrect++
         }
     } else {
-        window.alert("DONE!")
+        quizComplete()
     }
 }
 
+function quizComplete() {
+    clearInterval(timer);
+    questionEl.setAttribute("class", "hide");
+    resultEl.setAttribute("class", "show");
+    scoreEl.textContent = quizTimer;
+
+}
 
 startButton.addEventListener("click", startQuiz)
 
