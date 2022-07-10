@@ -9,13 +9,12 @@ var answersLi = document.getElementById("answers");
 var timerEl = document.getElementById("timer");
 var correctnessEl = document.getElementById("correctness");
 var scoreEl = document.getElementById("score");
-var scoreScreenEl = document.getElementById("scores-screen")
+// var scoreScreenEl = document.getElementById("scores-screen")
 
 // Initializing Variables
 var questionIndex = 0
-var quizTimer = questions.length * 20
-var correct = 0
-var incorrect = 0
+var quizTimer = questions.length * 10
+
 
 
 // Setting up Timer
@@ -53,7 +52,7 @@ function questionRender() {
         choiceButton.setAttribute("value", i + 1);
         choiceButton.textContent = qAnswer;
         choiceButton.onclick = isCorrect;
-        answersLi.appendChild(choiceButton)
+        answersLi.appendChild(choiceButton);
     }
     console.log(questionIndex)
 }
@@ -71,21 +70,21 @@ function isCorrect() {
     // If loop to index through the questions as they are answered
     if (questionIndex + 1 < questions.length) {
         if (this.value == questions[questionIndex].answer) {
-            console.log("Whooshooo!")
-            questionIndex++
-            removeAllChildren(answersLi)
-            questionRender()
+            console.log("Whooshooo!");
+            questionIndex++;
+            removeAllChildren(answersLi);
+            questionRender();
             correctnessEl.textContent = "Correct!";
             setTimeout(clearFeedback, 3000);
-            correct++
         } else {
-            console.log("damn")
-            questionIndex++
-            removeAllChildren(answersLi)
-            questionRender()
-            correctnessEl.textContent = "Incorrect!"
+            console.log("damn");
+            questionIndex++;
+            removeAllChildren(answersLi);
+            questionRender();
+            correctnessEl.textContent = "Incorrect!";
             setTimeout(clearFeedback, 3000);
-            incorrect++
+            quizTimer = quizTimer - 10;
+
         }
     } else {
         quizComplete()
@@ -103,31 +102,23 @@ function quizComplete() {
 }
 
 
-// Pulls scoreboard from local storage, updates with new score data
+// Pulls scoreboard from local storage, updates with new score data and saves to local storage
 function updateScoreBoard() {
-    var scoreBoard = JSON.parse(window.localStorage.getItem("quizScores")) || []
-    var ID = document.getElementById("ID").value
-    var score = quizTimer
+    var scoreBoard = JSON.parse(window.localStorage.getItem("quizScores")) || [];
+    var ID = document.getElementById("ID").value;
+    var score = quizTimer;
 
     if (ID != "") {
         var newScore = {
             ID: ID,
             score: score
         };
-
         scoreBoard.push(newScore);
         window.localStorage.setItem("quizScores", JSON.stringify(scoreBoard));
-
-        resultEl.setAttribute("class", "hide");
-        scoreScreenEl.setAttribute("class", "show")
-
-
+        window.location.href = "./highscores.html";
     } else {
-        window.alert("Please Enter ID!")
+        window.alert("Please Enter ID!");
     }
-    console.log(scoreBoard)
-    console.log(newScore)
-
 }
 
 // Function to clear the correct/incorrect feedback
@@ -136,7 +127,7 @@ function clearFeedback() {
 }
 
 
-startButton.addEventListener("click", startQuiz)
+startButton.addEventListener("click", startQuiz);
 
 
 // NTS:

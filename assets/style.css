@@ -13,7 +13,7 @@
 body {
     font-size: 125%;
     line-height: 1.25;
-
+    text-align: center;
 }
 
 ul {
@@ -41,30 +41,17 @@ ul {
     margin: 10px;
 }
 
-#highScore
+#backButton {
+    text-align: center;
 
+}
 
-/* Large smartphone sizing */
+#playerScoreList {
+    max-width: 400px;
+    margin: 0 auto 0 auto;
+}
 
-@media screen and (max-width: 768px) {
-    .subcard {
-        width: 80%;
-    }
-
-    .SubProjects {
-        height: 125px;
-    }
-
-
-    h3, h5 {
-        font-size: 20px;
-
-    }
-
-
-    .contactMe a {
-        font-size: 15px;
-    }
-
+#scores {
+    font-size:150%;
 
 }
