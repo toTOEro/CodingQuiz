@@ -54,7 +54,6 @@ function questionRender() {
         choiceButton.onclick = isCorrect;
         answersLi.appendChild(choiceButton);
     }
-    console.log(questionIndex)
 }
 
 // Function from https://www.javascripttutorial.net/dom/manipulating/remove-all-child-nodes/
@@ -70,14 +69,12 @@ function isCorrect() {
     // If loop to index through the questions as they are answered
     if (questionIndex + 1 < questions.length) {
         if (this.value == questions[questionIndex].answer) {
-            console.log("Whooshooo!");
             questionIndex++;
             removeAllChildren(answersLi);
             questionRender();
             correctnessEl.textContent = "Correct!";
             setTimeout(clearFeedback, 3000);
         } else {
-            console.log("damn");
             questionIndex++;
             removeAllChildren(answersLi);
             questionRender();
@@ -129,7 +126,3 @@ function clearFeedback() {
 
 startButton.addEventListener("click", startQuiz);
 
-
-// NTS:
-// For the future updates need to add a check to confirm if the question to be rendered is last
-// If it's the last question, it'll change functions to pass to the final answer

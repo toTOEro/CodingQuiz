@@ -1,15 +1,10 @@
-:root {
-  
-
-}
-
 /* Global Settings */
 * {
     font-family: 'Montserrat';
 
 }
 
-
+/* General styling */
 body {
     font-size: 125%;
     line-height: 1.25;
@@ -34,6 +29,7 @@ ul {
 }
 
 
+/* Styles the answer buttons */
 .answer {
     width: auto;
     height: 50px;
@@ -41,16 +37,19 @@ ul {
     margin: 10px;
 }
 
+/* Styles backbutotn */
 #backButton {
     text-align: center;
 
 }
 
+/* Styles player score list  */
 #playerScoreList {
     max-width: 400px;
     margin: 0 auto 0 auto;
 }
 
+/* styles the "scores!" at the high score screen */
 #scores {
     font-size:150%;
 
