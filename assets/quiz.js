@@ -14,6 +14,7 @@ var scoreEl = document.getElementById("score");
 // Initializing Variables
 var questionIndex = 0
 var quizTimer = questions.length * 10
+timerEl.textContent = "Time Left: " + quizTimer;
 
 
 
@@ -31,9 +32,9 @@ function timeCounter() {
 
 // Function to start the quiz and initiate question rendering
 function startQuiz() {
+    timer = setInterval(timeCounter, 1000);
     startEl.setAttribute("class", "hide");
     questionEl.setAttribute("class", "show")
-    timer = setInterval(timeCounter, 1000);
     questionRender()
 }
 
@@ -78,7 +79,7 @@ function isCorrect() {
             questionIndex++;
             removeAllChildren(answersLi);
             questionRender();
-            correctnessEl.textContent = "Incorrect!";
+            correctnessEl.textContent = "Incorrect! (-10 seconds!)";
             setTimeout(clearFeedback, 3000);
             quizTimer = quizTimer - 10;
 
